@@ -22,7 +22,7 @@ def process_image():
         sub_operation = request.form.get('sub_operation')
         image_choice1 = request.form.get('image_choice1')
 
-        img_1_path = f'static/{image_choice1}'
+        img_1_path = image_choice1
         img_1 = cv2.imread(img_1_path)
 
         if img_1 is None:
