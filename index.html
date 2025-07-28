@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: #555555;
+        }
+        select, input[type="submit"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Processing with OpenCV</h1>
+        <form action="/process-image" method="post">
+            <label for="operation">Select operation:</label>
+            <select name="operation" id="operation" onchange="updateSubOptions()">
+                <option value="sobel">Sobel</option>
+                <option value="hist">Histogram Equalization</option>
+                <option value="erode">Erode</option>
+                <option value="dilate">Dilate</option>
+                <option value="change_hue">Change Hue</option>
+                <option value="grabCut">GrabCut</option>
+                <option value="findContours">Find Contours</option>
+                <option value="blur">Blur</option>
+                <option value="Canny">Canny</option>
+                <option value="cvtColor">Convert to Grayscale</option>
+                <option value="cornerHarris">Corner Harris</option>
+            </select><br>
+
+            <label for="sub_operation">Select sub-operation:</label>
+            <select name="sub_operation" id="sub_operation">
+                <!-- Sub-options will be updated based on the selected operation -->
+            </select><br>
+
+            <label for="image_choice1">Select Image:</label>
+            <select name="image_choice1" id="image_choice1">
+                <option value="img1.jpeg">Image 1</option>
+                <option value="img2.jpeg">Image 2</option>
+                <option value="original.jpeg">Original Image</option>
+                <option value="match.jpeg">Match Image</option>
+                <option value="car.jpeg">Car Image</option>
+                <option value="chess.png">Chess Image</option>
+                <option value="cartoon.png">Cartoon Image</option>
+                <option value="face.jpeg">Face Image</option>
+            </select><br>
+
+            <input type="submit" value="Process Image">
+        </form>
+    </div>
+
+    <script>
+        function updateSubOptions() {
+            const operation = document.getElementById('operation').value;
+            const subOperationSelect = document.getElementById('sub_operation');
+            subOperationSelect.innerHTML = '';
+
+            if (operation === 'blur') {
+                subOperationSelect.innerHTML = `
+                    <option value="median">Median Blur</option>
+                    <option value="gaussian">Gaussian Blur</option>
+                    <option value="blur">Blur</option>
+                    <option value="boxFilter">Box Filter</option>
+                `;
+            } else {
+                subOperationSelect.innerHTML = '<option value="">N/A</option>';
+            }
+        }
+
+        // Initialize sub-options on page load
+        window.onload = updateSubOptions;
+    </script>
+</body>
+</html>
